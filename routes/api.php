@@ -34,4 +34,5 @@ Route::middleware('api')->group(function () {
     Route::get('/reports/books', [ReportController::class, 'bookReport']);
     Route::get('/reports/loans', [ReportController::class, 'loanReport']);
     Route::post('/members/register', [MemberController::class, 'register']);
+    Route::post('/members/loans', [LoanController::class, 'memberStore']);
 });
