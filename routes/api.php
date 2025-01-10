@@ -33,4 +33,5 @@ Route::middleware('api')->group(function () {
     Route::put('loans/{id}/return', [LoanController::class, 'processReturn']);
     Route::get('/reports/books', [ReportController::class, 'bookReport']);
     Route::get('/reports/loans', [ReportController::class, 'loanReport']);
+    Route::post('/members/register', [MemberController::class, 'register']);
 });

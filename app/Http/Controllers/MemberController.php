@@ -94,4 +94,33 @@ class MemberController extends Controller
         $member->delete();
         return response()->json(['message' => 'Member deleted']);
     }
+
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:members,email',
+            'phone_number' => 'required|string|max:20',
+            'address' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        // Generate member ID (contoh: MEM-001, MEM-002, dst)
+        $lastMember = Member::orderBy('id', 'desc')->first();
+        $nextId = $lastMember ? (int) substr($lastMember->member_id, 4) + 1 : 1;
+        $memberId = 'MEM-' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
+
+        $member = Member::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'member_id' => $memberId,
+        ]);
+
+        return response()->json(['message' => 'Member registered successfully'], 201);
+    }
 }
