@@ -10,8 +10,6 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\ReportController;
 
-
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -23,8 +21,10 @@ Route::middleware('api')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
     });
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::apiResource('books', BookController::class);
+    
     Route::get('/books/search', [BookController::class, 'search']);
+    Route::apiResource('books', BookController::class);
+    
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('members', MemberController::class);
     Route::apiResource('loans', LoanController::class)->except(['update', 'destroy']);
