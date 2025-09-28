@@ -24,6 +24,8 @@ Route::middleware('api')->group(function () {
     
     Route::get('/books/search', [BookController::class, 'search']);
     Route::apiResource('books', BookController::class);
+    Route::post('/books/{id}/cover', [BookController::class, 'updateCover']);
+    Route::delete('/books/{id}/cover', [BookController::class, 'deleteCover']);
     
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('members', MemberController::class);

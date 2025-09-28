@@ -17,6 +17,7 @@ class Book extends Model
         'publisher',
         'category_id',
         'stock',
+        'book_cover',
     ];
 
     /**
